@@ -1,9 +1,7 @@
-import React from 'react'
+import { IColumn } from './DataTableOptions'
 
-const DataTableHeader = () : JSX.Element => {
-  return (
-    <div></div>
-  )
+const DataTableHeader = (data: IColumn): JSX.Element => {
+  return <div>{data}</div>
 }
 
 export default DataTableHeader

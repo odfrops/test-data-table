@@ -1,8 +1,14 @@
-import React from 'react'
-
-const DataTableFooter = () : JSX.Element => {
+const DataTableFooter = (
+  curPage: number,
+  maxPage: number,
+  updatePage: () => void
+): JSX.Element => {
   return (
-    <div></div>
+    <div onClick={updatePage}>
+      <div>Footer</div>
+      <div>{curPage}</div>
+      <div>{maxPage}</div>
+    </div>
   )
 }
 

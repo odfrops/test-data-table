@@ -1,5 +1,5 @@
 export interface IRow {
-  [propName: string]: number | string | boolean;
+  [propName: string]: number | string | boolean
 }
 
 export interface IColumn {
@@ -8,7 +8,16 @@ export interface IColumn {
   sortable: boolean
 }
 
-export interface IOptions {
-  data: Array<IRow>
-  headers: Array<IColumn | string>
+export interface IGroup {
+  column: string
+  value: string
+  default?: number
 }
+
+export interface IConfig {
+  data?: Array<IRow>
+  headers?: Array<IColumn | string>
+  groupBy?: IGroup
+}
+
+export type SortDirection = 'ASC' | 'DESC'

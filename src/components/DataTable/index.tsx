@@ -1,13 +1,14 @@
-import React from 'react'
 import * as Types from './DataTableOptions'
 
-const DataTable: React.FC<Types.IOptions> = (options): JSX.Element => {
+const DataTable: React.FC<Types.IConfig> = (config): JSX.Element => {
+  let dropdown: Types.SortDirection = 'ASC'
 
-  console.log(options)
+  dropdown = 'DESC'
 
-  return (
-    <div>Hey, mock table</div>
-  )
+  console.log(dropdown)
+  console.log(config)
+
+  return <div>Hey, mock table</div>
 }
 
 export default DataTable

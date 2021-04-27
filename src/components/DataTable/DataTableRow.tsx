@@ -1,9 +1,7 @@
-import React from 'react'
+import { IRow } from './DataTableOptions'
 
-const DataTableRow = () : JSX.Element => {
-  return (
-    <div></div>
-  )
+const DataTableRow = (data: IRow): JSX.Element => {
+  return <div>{JSON.stringify(data)}</div>
 }
 
 export default DataTableRow
