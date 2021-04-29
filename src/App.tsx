@@ -2,13 +2,21 @@ import './App.css'
 import DataTable, { IConfig } from './components/DataTable'
 import MockData from './MOCK_DATA.json'
 const App = (): JSX.Element => {
-  const options: IConfig = {
+  const config: IConfig = {
     data: MockData,
-    headers: Object.keys(MockData[0]),
+    columns: Object.keys(MockData[0]).map((e) => ({
+      name: e,
+      filterable: true,
+      sortable: true,
+    })),
+    pageSize: 15,
+    groupBy: {
+      column: 'car',
+    },
   }
   return (
     <div className="App">
-      <DataTable {...options}></DataTable>
+      <DataTable {...config}></DataTable>
     </div>
   )
 }

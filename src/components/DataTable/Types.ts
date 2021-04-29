@@ -4,20 +4,20 @@ export interface IRow {
 
 export interface IColumn {
   name: string
-  filterable: boolean
-  sortable: boolean
+  filterable?: boolean
+  sortable?: boolean
 }
 
-export interface IGroup {
+export interface IGroupBy {
   column: string
-  value: string
   default?: number
 }
 
 export interface IConfig {
-  data?: Array<IRow>
-  headers?: Array<IColumn | string>
-  groupBy?: IGroup
+  data?: IRow[]
+  columns: (IColumn | string)[]
+  groupBy?: IGroupBy
+  pageSize?: number
 }
 
 export type SortDirection = 'ASC' | 'DESC'

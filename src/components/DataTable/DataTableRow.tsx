@@ -1,7 +1,8 @@
-import { IRow } from './DataTableOptions'
+import { IRow } from './Types'
 
-const DataTableRow = (data: IRow): JSX.Element => {
-  return <div>{JSON.stringify(data)}</div>
+const DataTableRow = (props: { data: IRow }): JSX.Element => {
+  // TODO: Just build UI
+  return <div>{JSON.stringify(props.data)}</div>
 }
 
 export default DataTableRow
