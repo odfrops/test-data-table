@@ -79,6 +79,28 @@ const DataTable = (config: Types.IConfig): JSX.Element => {
     const rows = config.data === undefined ? [] : config.data
     // group rows
     let groups: Types.IRow[][]
+    if (rows.length > 1) {
+      let failed = false
+      const keys = Object.keys(rows[0])
+      if (keys.length !== config.columns.length) {
+        failed = true
+      } else {
+        for (let i = 0; i < keys.length; i++) {
+          const key = keys[i]
+          const column = config.columns[i]
+          if (typeof column === 'string') {
+            if (column !== key) failed = true
+          } else {
+            if (column.name !== key) failed = true
+          }
+        }
+      }
+      if (failed) {
+        setRowGroups([])
+        setCurPage(0)
+        return
+      }
+    }
     if (config.groupBy !== undefined) {
       const key = config.groupBy.column
       const keys: { [key: string]: Types.IRow[] } = {}
@@ -131,7 +153,14 @@ const DataTable = (config: Types.IConfig): JSX.Element => {
     }
     setRowGroups(groups)
     setCurPage(0)
-  }, [config.data, config.groupBy, pageSize, sortColumns, filters])
+  }, [
+    config.data,
+    config.groupBy,
+    config.columns,
+    pageSize,
+    sortColumns,
+    filters,
+  ])
 
   // Generate display data
   useEffect(() => {

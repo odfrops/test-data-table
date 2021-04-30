@@ -32,7 +32,7 @@ const DataTableHeaderPopup = (props: {
           <div>
             <input
               style={{ width: 'calc(100% - 7px)' }}
-              value={props.filter}
+              value={props.filter === undefined ? '' : props.filter}
               onChange={(e) => props.onFilter(e.target.value)}
             ></input>
           </div>

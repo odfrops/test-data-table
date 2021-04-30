@@ -5,6 +5,7 @@ import { IRow } from './Types'
 const DataTableRow = (props: {
   data: IRow
   rowStyle?: CSS.Properties
+  rowIndex: number
   expand: () => void
 }): JSX.Element => {
   const cells = []
@@ -18,17 +19,11 @@ const DataTableRow = (props: {
       )
     }
   }
-  const styles =
-    props.rowStyle !== undefined
-      ? { ...DataTableRowStyle, ...props.rowStyle }
-      : DataTableRowStyle
   return (
     <tr
-      data-testid="row"
+      data-testid={`row_${props.rowIndex}`}
       onClick={() => props.expand()}
-      style={{
-        ...styles,
-      }}
+      style={{ ...DataTableRowStyle, ...props.rowStyle }}
     >
       {cells}
     </tr>

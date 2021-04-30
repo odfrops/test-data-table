@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { DataTableFooterButton } from './Styles'
+import { DataTableFooterButton, DataTableFooterButtonNormal } from './Styles'
 
 const DataTableFooter = (props: {
   curPage: number
@@ -38,14 +38,14 @@ const DataTableFooter = (props: {
 
   useEffect(() => {
     const np: number[] = []
-    const cp = props.curPage,
-      limit = props.pageCount
+    const cp = props.curPage
+    const limit = props.pageCount
     pushToArray(np, 0)
     if (cp - 1 > 1) pushToArray(np, -1)
     if (cp - 1 > 0) pushToArray(np, cp - 1)
     pushToArray(np, cp)
     if (cp + 1 < limit) pushToArray(np, cp + 1)
-    if (cp + 1 < limit - 1) pushToArray(np, -2)
+    if (cp + 1 < limit - 2) pushToArray(np, -2)
     if (limit > 0) pushToArray(np, limit - 1)
     setPages(np)
   }, [props.curPage, props.pageCount])
@@ -57,7 +57,7 @@ const DataTableFooter = (props: {
           return (
             <div
               key={page}
-              style={DataTableFooterButton}
+              style={DataTableFooterButtonNormal}
               // onClick={() => onPage('prev')}
             >
               &hellip;
@@ -67,7 +67,7 @@ const DataTableFooter = (props: {
           return (
             <div
               key={page}
-              style={DataTableFooterButton}
+              style={DataTableFooterButtonNormal}
               // onClick={() => onPage('next')}
             >
               &hellip;
