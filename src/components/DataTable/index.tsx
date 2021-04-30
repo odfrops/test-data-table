@@ -4,7 +4,7 @@ import DataTableBody from './DataTableBody'
 import DataTableFooter from './DataTableFooter'
 import DataTableHeader from './DataTableHeader'
 import * as Types from './Types'
-
+import { DataTableStyle } from './Styles'
 const DataTable = (config: Types.IConfig): JSX.Element => {
   const [curPage, setCurPage] = useState(0)
   const [pageCount, setPageCount] = useState(1)
@@ -87,7 +87,7 @@ const DataTable = (config: Types.IConfig): JSX.Element => {
         if (rowKey in keys) {
           keys[rowKey].push(row)
         } else {
-          keys[rowKey] = []
+          keys[rowKey] = [row]
         }
       })
       groups = []
@@ -146,15 +146,23 @@ const DataTable = (config: Types.IConfig): JSX.Element => {
 
   return (
     <div>
-      <DataTableHeader
-        {...{ columns: config.columns, onSort, onFilter, filters, sortColumns }}
-      ></DataTableHeader>
-      <DataTableBody
-        {...{
-          data: displayData,
-          groupSize: config.groupBy?.default || DEFAULT_GROUP_SIZE,
-        }}
-      ></DataTableBody>
+      <table style={DataTableStyle}>
+        <DataTableHeader
+          {...{
+            columns: config.columns,
+            onSort,
+            onFilter,
+            filters,
+            sortColumns,
+          }}
+        ></DataTableHeader>
+        <DataTableBody
+          {...{
+            data: displayData,
+            groupSize: config.groupBy?.size || DEFAULT_GROUP_SIZE,
+          }}
+        ></DataTableBody>
+      </table>
       <DataTableFooter
         {...{
           curPage,

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import DataTableHeaderPopup from './DataTableHeaderPopup'
 import { IColumn, SortDirection } from './Types'
+import { DataTableHeaderStyle } from './Styles'
 
 const DataTableHeader = (props: {
   columns: (IColumn | string)[]
@@ -11,7 +12,6 @@ const DataTableHeader = (props: {
     [key: string]: SortDirection
   }
 }): JSX.Element => {
-  // Just build UI
   const [popups, togglePopup] = useState<boolean[]>(() => {
     return Array(props.columns.length).fill(false)
   })
@@ -23,31 +23,45 @@ const DataTableHeader = (props: {
     togglePopup(newPopups)
   }
   return (
-    <div>
-      {props.columns.map((column, idx) => {
-        if (typeof column === 'string') {
-          return <div>{column}</div>
-        } else {
-          const sortable = column.sortable === true
-          const filterable = column.filterable === true
-          return (
-            <DataTableHeaderPopup
-              key={idx}
-              {...{
-                filterable,
-                filter: props.filters[column.name],
-                sortable,
-                sort: props.sortColumns[column.name],
-                popup: popups[idx],
-                togglePopup: (toggle) => onPopup(idx, toggle),
-                onFilter: (value) => props.onFilter(column.name, value),
-                onSort: () => props.onSort(column.name),
-              }}
-            ></DataTableHeaderPopup>
-          )
-        }
-      })}
-    </div>
+    <thead>
+      <tr>
+        {props.columns.map((column, idx) => {
+          if (typeof column === 'string') {
+            return (
+              <th key={idx} style={DataTableHeaderStyle}>
+                {column}
+              </th>
+            )
+          } else {
+            const sortable = column.sortable === true
+            const filterable = column.filterable === true
+            return (
+              <th key={idx} style={DataTableHeaderStyle}>
+                <div
+                  onClick={() => onPopup(idx, !popups[idx])}
+                  style={{ cursor: 'pointer' }}
+                >
+                  {column.name}
+                </div>
+                {popups[idx] && (
+                  <DataTableHeaderPopup
+                    key={idx}
+                    {...{
+                      filterable,
+                      filter: props.filters[column.name],
+                      sortable,
+                      sort: props.sortColumns[column.name],
+                      onFilter: (value) => props.onFilter(column.name, value),
+                      onSort: () => props.onSort(column.name),
+                    }}
+                  ></DataTableHeaderPopup>
+                )}
+              </th>
+            )
+          }
+        })}
+      </tr>
+    </thead>
   )
 }
 

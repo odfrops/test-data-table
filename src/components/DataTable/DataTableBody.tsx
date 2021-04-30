@@ -6,7 +6,7 @@ const DataTableBody = (props: {
   groupSize: number
 }): JSX.Element => {
   return (
-    <div>
+    <tbody data-testid="body">
       {props.data.map((rowGroup, idx) => {
         return (
           <DataTableRowGroup
@@ -15,7 +15,7 @@ const DataTableBody = (props: {
           ></DataTableRowGroup>
         )
       })}
-    </div>
+    </tbody>
   )
 }
 

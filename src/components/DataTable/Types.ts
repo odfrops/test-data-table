@@ -10,7 +10,7 @@ export interface IColumn {
 
 export interface IGroupBy {
   column: string
-  default?: number
+  size?: number
 }
 
 export interface IConfig {
