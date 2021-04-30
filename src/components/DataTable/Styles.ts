@@ -17,7 +17,15 @@ export const DataTableRowStyle: CSS.Properties = {
   border: '1px solid #ddd',
 }
 
-export const DataTableRowExpandable: CSS.Properties = {
+export const DataTableRowNormal: CSS.Properties = {
+  backgroundColor: '#fff',
+}
+
+export const DataTableRowFirstExpandaded: CSS.Properties = {
+  backgroundColor: '#eee',
+}
+
+export const DataTableRowFirstCollapsed: CSS.Properties = {
   backgroundColor: '#ccc',
 }
 
@@ -28,5 +36,15 @@ export const DataTableFooterButton: CSS.Properties = {
   justifyContent: 'center',
   display: 'flex',
   cursor: 'pointer',
+  userSelect: 'none',
+}
+
+export const DataTableFooterButtonNormal: CSS.Properties = {
+  width: '30px',
+  height: '30px',
+  alignItems: 'center',
+  justifyContent: 'center',
+  display: 'flex',
+  cursor: 'auto',
   userSelect: 'none',
 }
